@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Bullet/Bullet.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24, 24 )
+
+[node name="Bullet" type="Area2D" groups=[
+"Bullet",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+live_time = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0.988235, 0.180392, 0.0745098, 1 )
+polygon = PoolVector2Array( -24, -24, -24, 24, 24, 24, 24, -24 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+[connection signal="area_entered" from="." to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
